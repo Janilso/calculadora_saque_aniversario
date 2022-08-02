@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 module.exports = {
-    process(_: string, sourcePath: string) {
+    process(_, sourcePath) {
         return {
             code: `module.exports = ${JSON.stringify(path.basename(sourcePath))};`,
         };

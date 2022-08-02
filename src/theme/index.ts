@@ -2,6 +2,12 @@ import { ptBR } from '@mui/material/locale';
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
+    interface Theme {
+        appColors: Record<string, string>;
+    }
+    interface ThemeOptions {
+        appColors: Record<string, string>;
+    }
     interface Palette {
         appColors: Record<string, string>;
     }
@@ -47,6 +53,7 @@ const AppTheme = createTheme(
             },
             appColors,
         },
+        appColors,
     },
     ptBR,
 );

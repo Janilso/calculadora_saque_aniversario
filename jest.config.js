@@ -10,8 +10,9 @@ module.exports = {
     },
     moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
     transform: {
-        '^.+\\.(js|jsx|ts|tsx)?$': 'babel-jest',
-        '^.+\\.(svg|png|jpg|gif)$': '<rootDir>/src/configs/svgTransform.ts',
+        '^.+\\.(ts|tsx)?$': 'babel-jest',
+        '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+            '<rootDir>/src/configs/fileTransformer.js',
     },
     moduleNameMapper: {
         '\\.svg$': '<rootDir>/src/configs/svgrMock.ts',
