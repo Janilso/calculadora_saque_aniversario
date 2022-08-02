@@ -1,0 +1,24 @@
+
+html {
+    min-height: 100vh;
+    position: relative;
+    scroll-behavior: smooth;
+    font-family: 'BancoDoBrasilTextos' !important;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'BancoDoBrasilTextos';
+
+
+}
+
+
+body a{
+    text-decoration: none;    
+}
