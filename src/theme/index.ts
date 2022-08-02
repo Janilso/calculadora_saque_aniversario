@@ -10,7 +10,7 @@ declare module '@mui/material/styles' {
     }
 }
 
-export const appColors = {
+const appColors = {
     primaryColor: '#5A6FFF',
     secondaryColor: '#FCFC30',
     primaryTextColor: 'rgba(255,255,255,.9)',
