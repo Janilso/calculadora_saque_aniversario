@@ -1,5 +1,5 @@
 import { ptBR } from '@mui/material/locale';
-import { createTheme } from '@mui/material/styles';
+import { alpha, createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
     interface Theme {
@@ -12,48 +12,48 @@ declare module '@mui/material/styles' {
         appColors: Record<string, string>;
     }
     interface PaletteOptions {
-        appColors?: Record<string, string>;
+        appColors: Record<string, string>;
     }
 }
 
 const appColors = {
-    primaryColor: '#5A6FFF',
-    secondaryColor: '#FCFC30',
-    primaryTextColor: 'rgba(255,255,255,.9)',
-    secondaryLightTextColor: '#ccc',
-    secondaryColorContrastText: '#2e2e2e',
-    primaryHeaderColor: '#edf0f4',
-    primaryYellow: '#FCEE4F',
-    secondaryYellow: '#FFFA72',
-    primaryBlue: '#5A6FFF',
-    secondaryBlue: '#5A6FFF',
-    terciaryBlue: '#95B9D9',
+    primary: '#001F3F',
+    primaryMedium: '#083358',
+    primaryLight: '#0D63A5',
+    secondary: '#FFD717',
     white: '#ffff',
-    darkBlue: '#3A4ABA',
-    black: '#000000',
-    lightBlack: 'rgba(0, 0, 0, 0.85)',
 };
 
 const AppTheme = createTheme(
     {
+        typography: {
+            fontFamily: ['"Exo"', 'sans-serif'].join(','),
+            allVariants: {
+                color: appColors.white,
+            },
+        },
         palette: {
             mode: 'dark',
             primary: {
-                main: appColors.primaryColor,
-                contrastText: appColors.primaryTextColor,
+                main: appColors.primary,
+                contrastText: appColors.white,
             },
             secondary: {
-                main: appColors.secondaryColor,
-                contrastText: appColors.secondaryColorContrastText,
+                main: appColors.secondary,
+                contrastText: appColors.white,
             },
             text: {
-                primary: appColors.secondaryColorContrastText,
-                secondary: appColors.primaryColor,
-                disabled: appColors.secondaryLightTextColor,
+                primary: appColors.primary,
+                secondary: appColors.secondary,
+                disabled: alpha(appColors.primary, 0.5),
             },
+
             appColors,
         },
         appColors,
+        components: {
+            MuiTypography: {},
+        },
     },
     ptBR,
 );
