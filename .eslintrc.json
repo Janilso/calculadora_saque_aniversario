@@ -6,10 +6,10 @@
         "jest": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
         "airbnb",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "prettier",
         "prettier/"
     ],
@@ -72,6 +72,9 @@
                 "ts": "never",
                 "tsx": "never"
             }
+        ],
+        "react/require-default-props": [
+            0
         ]
     },
     "settings": {

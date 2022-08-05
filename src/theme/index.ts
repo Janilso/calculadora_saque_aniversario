@@ -1,5 +1,6 @@
 import { ptBR } from '@mui/material/locale';
 import { alpha, createTheme } from '@mui/material/styles';
+import { CSSProperties } from 'react';
 
 declare module '@mui/material/styles' {
     interface Theme {
@@ -8,11 +9,25 @@ declare module '@mui/material/styles' {
     interface ThemeOptions {
         appColors: Record<string, string>;
     }
+
     interface Palette {
         appColors: Record<string, string>;
     }
     interface PaletteOptions {
-        appColors: Record<string, string>;
+        appColors?: Record<string, string>;
+    }
+
+    interface TypographyVariants {
+        h2semibold: CSSProperties;
+    }
+    interface TypographyVariantsOptions {
+        h2semibold?: CSSProperties;
+    }
+}
+
+declare module '@mui/material/Typography' {
+    interface TypographyPropsVariantOverrides {
+        h2semibold: true;
     }
 }
 
@@ -30,6 +45,17 @@ const AppTheme = createTheme(
             fontFamily: ['"Exo"', 'sans-serif'].join(','),
             allVariants: {
                 color: appColors.white,
+                fontFamily: ['"Exo"', 'sans-serif'].join(','),
+            },
+            h2: {
+                fontSize: 28,
+                fontWeight: 400,
+            },
+            h2semibold: {
+                fontFamily: ['"Exo"', 'sans-serif'].join(','),
+                color: appColors.white,
+                fontSize: 28,
+                fontWeight: 600,
             },
         },
         palette: {
@@ -52,7 +78,81 @@ const AppTheme = createTheme(
         },
         appColors,
         components: {
-            MuiTypography: {},
+            MuiTypography: {
+                defaultProps: {
+                    variant: 'body2',
+                },
+            },
+            MuiTextField: {
+                defaultProps: {
+                    variant: 'outlined',
+                },
+                styleOverrides: {
+                    root: {
+                        '&:hover .MuiFormLabel-root': {
+                            color: appColors.primary,
+                        },
+                    },
+                },
+            },
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    notchedOutline: {
+                        borderColor: appColors.primaryLight,
+                        '& legend': {
+                            fontSize: '0.65rem',
+                        },
+                    },
+                },
+            },
+            MuiFormLabel: {
+                styleOverrides: {
+                    root: {
+                        fontSize: 14,
+                        color: appColors.primaryLight,
+                    },
+                },
+            },
+            MuiInputBase: {
+                styleOverrides: {
+                    input: {
+                        fontSize: 14,
+                    },
+                },
+            },
+            MuiSelect: {
+                styleOverrides: {
+                    outlined: {
+                        lineHeight: 'initial',
+                    },
+                    iconOutlined: {
+                        color: appColors.primaryMedium,
+                    },
+                },
+            },
+            MuiMenuItem: {
+                styleOverrides: {
+                    root: {
+                        fontSize: 14,
+                    },
+                    gutters: {
+                        backgroundColor: appColors.primary,
+                        '&.Mui-selected': {
+                            backgroundColor: appColors.primaryMedium,
+                            '&:hover': {
+                                backgroundColor: alpha(appColors.primaryLight, 0.2),
+                            },
+                        },
+                    },
+                },
+            },
+            MuiList: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: appColors.primary,
+                    },
+                },
+            },
         },
     },
     ptBR,
