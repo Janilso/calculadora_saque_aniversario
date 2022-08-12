@@ -6,7 +6,7 @@ import {
     SelectProps as SelectPropsMui,
     TextField,
 } from '@mui/material';
-import { ChangeEvent, FocusEvent, ReactNode } from 'react';
+import React, { ChangeEvent, FocusEvent, ReactNode } from 'react';
 import { Controller } from 'react-hook-form';
 import { formatMoneyBLR, removeMoneyFormat } from '../../utils/normalizers';
 import { TCustomInputSelect } from '../../utils/types';
@@ -17,7 +17,7 @@ type TOnChange = {
 };
 
 interface CustomInputProps {
-    label: string;
+    label: string | ReactNode;
     errorMessage?: string;
     name: string;
     defaultValue?: string | number;

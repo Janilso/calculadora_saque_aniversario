@@ -1,8 +1,9 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { IconFgts } from '../../assets/icons';
 import { CustomInput } from '../../components/CustomInput';
+import TabelResult from '../../components/TabelResult';
 import { getOptionMonth } from '../../utils/functions';
 import { styles } from './styles';
 
@@ -15,11 +16,13 @@ type FormValues = {
 function Home() {
     const methods = useForm<FormValues>();
     const { handleSubmit } = methods;
-
     const optionsSelect = useMemo(() => getOptionMonth(), []);
+
+    const [disableResult, setDisableResult] = useState(true);
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         console.log('data', data);
+        setDisableResult((prev) => !prev);
     };
 
     return (
@@ -36,8 +39,12 @@ function Home() {
                     </Grid>
                     <Grid item xs={6} sx={styles.containerRight}>
                         <IconFgts />
-                        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-                            <FormProvider {...methods}>
+                        <FormProvider {...methods}>
+                            <Box
+                                component="form"
+                                onSubmit={handleSubmit(onSubmit)}
+                                sx={styles.formContainer}
+                            >
                                 <Grid item xs={12} container gap={1} sx={styles.itensForm}>
                                     <CustomInput
                                         label="Saldo do FGTS"
@@ -55,7 +62,6 @@ function Home() {
                                         defaultValue={1}
                                         fullWidth
                                         SelectProps={{
-                                            // displayEmpty: true,
                                             MenuProps: {
                                                 PaperProps: {
                                                     style: {
@@ -67,9 +73,19 @@ function Home() {
                                         optionsSelect={optionsSelect}
                                     />
                                 </Grid>
-                                <Button onClick={handleSubmit(onSubmit)}>Calcular</Button>
-                            </FormProvider>
-                        </Box>
+                                <Grid container sx={styles.actions}>
+                                    <Button onClick={handleSubmit(onSubmit)}>Calcular</Button>
+                                </Grid>
+                            </Box>
+                        </FormProvider>
+                        <TabelResult
+                            saldoFgts={3500}
+                            somaLancamentos={1000}
+                            saldoFuturoTotal={4500}
+                            previsaoSaque={2100}
+                            sx={styles.result}
+                            disabled={disableResult}
+                        />
                     </Grid>
                 </Grid>
             </Container>

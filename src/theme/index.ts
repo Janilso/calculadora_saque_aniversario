@@ -73,7 +73,6 @@ const AppTheme = createTheme(
                 secondary: appColors.secondary,
                 disabled: alpha(appColors.primary, 0.5),
             },
-
             appColors,
         },
         appColors,
@@ -150,6 +149,58 @@ const AppTheme = createTheme(
                 styleOverrides: {
                     root: {
                         backgroundColor: appColors.primary,
+                    },
+                },
+            },
+            MuiButton: {
+                defaultProps: {
+                    variant: 'contained',
+                    size: 'large',
+                    disableElevation: true,
+                },
+                variants: [
+                    {
+                        props: { size: 'large' },
+                        style: {
+                            padding: 13,
+                        },
+                    },
+                    {
+                        props: { color: 'primary' },
+                        style: {
+                            background: appColors.primaryMedium,
+                            color: appColors.secondary,
+                        },
+                    },
+                ],
+                styleOverrides: {
+                    root: {
+                        minWidth: 136,
+                        fontSize: 14,
+                        textTransform: 'none',
+                    },
+                },
+            },
+            MuiTooltip: {
+                defaultProps: {
+                    arrow: true,
+                    placement: 'top-start',
+                },
+                styleOverrides: {
+                    tooltip: {
+                        maxWidth: 175,
+                        background: appColors.primaryMedium,
+                        border: '1px solid',
+                        borderColor: appColors.primary,
+                        padding: '8px',
+                        marginBottom: '8px !important',
+                    },
+                    arrow: {
+                        color: appColors.primaryMedium,
+                        '&:before': {
+                            border: '1px solid',
+                            borderColor: appColors.primary,
+                        },
                     },
                 },
             },

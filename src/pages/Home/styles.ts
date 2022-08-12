@@ -22,14 +22,18 @@ export const styles: TypeStyles = {
         bgcolor: 'appColors.white',
         p: 2,
         borderRadius: '0 8px 8px 0',
-        alignContent: 'center',
-        justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        // alignContent: 'center',
+        // justifyContent: 'center',
     },
     itensForm: {
         justifyContent: 'center',
         flexWrap: 'nowrap',
         '& .MuiTextField-root': {
-            maxWidth: 136,
+            maxWidth: 170,
+            flex: 1,
         },
     },
     title: {
@@ -55,5 +59,17 @@ export const styles: TypeStyles = {
         //     width: '70%',
         //     // left: 0,
         // },
+    },
+    formContainer: {
+        // display: 'flex',
+        // flexDirection: 'column',
+        mt: 6,
+    },
+    actions: {
+        justifyContent: 'center',
+        mt: 3,
+    },
+    result: {
+        mt: 5.5,
     },
 };
