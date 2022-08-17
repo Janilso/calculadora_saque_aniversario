@@ -1,5 +1,5 @@
 const ROUTES_NAME = {
-    INICIO: '/inicio',
+    INICIO: '/',
     NOT_FOUND: '*',
 };
 
