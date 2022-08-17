@@ -92,18 +92,19 @@ function Home() {
                                 <Grid container sx={styles.actions}>
                                     <Button onClick={handleSubmit(onSubmit)}>Calcular</Button>
                                 </Grid>
+                                {dataResult.previsaoSaque ? (
+                                    <TabelResult
+                                        saldoFgts={dataResult.saldoFgts}
+                                        somaLancamentos={dataResult.somaLancamentos}
+                                        saldoFuturoTotal={dataResult.saldoFuturoTotal}
+                                        previsaoSaque={dataResult.previsaoSaque}
+                                        loading={dataResult.loading}
+                                        // loading
+                                        sx={styles.result}
+                                    />
+                                ) : null}
                             </Box>
                         </FormProvider>
-                        {dataResult.previsaoSaque ? (
-                            <TabelResult
-                                saldoFgts={dataResult.saldoFgts}
-                                somaLancamentos={dataResult.somaLancamentos}
-                                saldoFuturoTotal={dataResult.saldoFuturoTotal}
-                                previsaoSaque={dataResult.previsaoSaque}
-                                loading={dataResult.loading}
-                                sx={styles.result}
-                            />
-                        ) : null}
                     </Grid>
                 </Grid>
             </Container>

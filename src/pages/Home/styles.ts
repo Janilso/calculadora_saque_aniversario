@@ -25,8 +25,6 @@ export const styles: TypeStyles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        // alignContent: 'center',
-        // justifyContent: 'center',
     },
     itensForm: {
         justifyContent: 'center',
@@ -42,27 +40,8 @@ export const styles: TypeStyles = {
         fontSize: 50,
         lineHeight: '66px',
         position: 'relative',
-        // '&:after': {
-        //     background: (theme) => `none repeat scroll 0 0 ${theme.appColors.primaryLight}`,
-        //     bottom: 0,
-        //     content: "''",
-        //     display: 'block',
-        //     height: '8px',
-        //     right: 0,
-        //     position: 'absolute',
-        //     // bgcolor: 'appColors.white',
-        //     transition: 'width 0.3s ease 0s',
-        //     // transition: 'width 0.3s ease 0s, left 0.3s ease 0s',
-        //     width: 85,
-        // },
-        // '&:hover:after': {
-        //     width: '70%',
-        //     // left: 0,
-        // },
     },
     formContainer: {
-        // display: 'flex',
-        // flexDirection: 'column',
         mt: 6,
     },
     actions: {
