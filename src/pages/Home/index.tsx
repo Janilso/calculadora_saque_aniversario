@@ -16,7 +16,7 @@ type FormValues = {
 };
 
 interface IStateDataResult {
-    open: boolean;
+    loading: boolean;
     previsaoSaque?: number;
     saldoFgts?: number;
     saldoFuturoTotal?: number;
@@ -27,21 +27,18 @@ function Home() {
     const methods = useForm<FormValues>();
     const { handleSubmit } = methods;
     const optionsSelect = useMemo(() => getOptionMonth(), []);
-    const [dataResult, setDataResult] = useState<IStateDataResult>({ open: false });
+    const [dataResult, setDataResult] = useState<IStateDataResult>({ loading: false });
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        setDataResult({ open: false });
+        setDataResult((prev) => ({ ...prev, loading: true }));
         const { mesNascimento: dataMesNascimento, salarioBruto, saldoFgts: dataSaldo } = data;
         const mesNascimento = parseFloat(dataMesNascimento);
         const salario = removeMoneyFormat(salarioBruto) as number;
         const saldoFgts = removeMoneyFormat(dataSaldo) as number;
 
-        calcSaqueService
-            .postCalculo({ mesNascimento, salario, saldoFgts })
-            .then((result) => {
-                setDataResult({ open: true, ...result });
-            })
-            .catch(() => setDataResult({ open: false }));
+        calcSaqueService.postCalculo({ mesNascimento, salario, saldoFgts }).then((result) => {
+            setDataResult({ loading: false, ...result });
+        });
     };
 
     return (
@@ -97,14 +94,16 @@ function Home() {
                                 </Grid>
                             </Box>
                         </FormProvider>
-                        <TabelResult
-                            saldoFgts={dataResult.saldoFgts}
-                            somaLancamentos={dataResult.somaLancamentos}
-                            saldoFuturoTotal={dataResult.saldoFuturoTotal}
-                            previsaoSaque={dataResult.previsaoSaque}
-                            disabled={!dataResult.open}
-                            sx={styles.result}
-                        />
+                        {dataResult.previsaoSaque ? (
+                            <TabelResult
+                                saldoFgts={dataResult.saldoFgts}
+                                somaLancamentos={dataResult.somaLancamentos}
+                                saldoFuturoTotal={dataResult.saldoFuturoTotal}
+                                previsaoSaque={dataResult.previsaoSaque}
+                                loading={dataResult.loading}
+                                sx={styles.result}
+                            />
+                        ) : null}
                     </Grid>
                 </Grid>
             </Container>

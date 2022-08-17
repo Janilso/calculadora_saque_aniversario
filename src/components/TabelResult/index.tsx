@@ -1,4 +1,4 @@
-import { Box, Grid, SxProps, Theme, Tooltip, Typography } from '@mui/material';
+import { Box, Grid, Skeleton, Stack, SxProps, Theme, Tooltip, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { IconWarning } from '../../assets/icons';
 import { formatMoneyBLR } from '../../utils/normalizers';
@@ -9,7 +9,7 @@ interface TabelResultProps {
     somaLancamentos?: number;
     saldoFuturoTotal?: number;
     previsaoSaque?: number;
-    disabled?: boolean;
+    loading?: boolean;
     sx?: SxProps<Theme>;
 }
 
@@ -25,7 +25,7 @@ function TabelResult({
     somaLancamentos = 0,
     saldoFuturoTotal = 0,
     previsaoSaque = 0,
-    disabled = false,
+    loading = false,
     sx,
 }: TabelResultProps) {
     const dataList = useMemo<DataListType[]>(() => {
@@ -56,49 +56,61 @@ function TabelResult({
         ];
     }, [saldoFgts, somaLancamentos, saldoFuturoTotal, previsaoSaque]);
 
+    const renderLoading = () => {
+        return (
+            <Stack spacing={0.2}>
+                <Skeleton height={42} />
+                <Skeleton height={42} />
+                <Skeleton height={42} />
+                <Skeleton height={96} />
+            </Stack>
+        );
+    };
+
     return (
         <Box
             sx={
                 {
                     ...sx,
                     ...styles.container,
-                    maxHeight: disabled ? 0 : 350,
                 } as SxProps
             }
         >
-            {dataList.map(({ label, value, tooltip, isPrevision = false }) => {
-                const styleGrid = {
-                    ...styles.line,
-                    ...(isPrevision ? styles.linePrev : {}),
-                } as const;
+            {loading
+                ? renderLoading()
+                : dataList.map(({ label, value, tooltip, isPrevision = false }) => {
+                      const styleGrid = {
+                          ...styles.line,
+                          ...(isPrevision ? styles.linePrev : {}),
+                      } as const;
 
-                const styleLabel = {
-                    ...styles.itemLabel,
-                    ...(isPrevision ? styles.itemLabelPrev : {}),
-                } as const;
+                      const styleLabel = {
+                          ...styles.itemLabel,
+                          ...(isPrevision ? styles.itemLabelPrev : {}),
+                      } as const;
 
-                const styleValue = {
-                    ...styles.itemValue,
-                    ...(isPrevision ? styles.itemValuePrev : {}),
-                } as const;
+                      const styleValue = {
+                          ...styles.itemValue,
+                          ...(isPrevision ? styles.itemValuePrev : {}),
+                      } as const;
 
-                return (
-                    <Grid key={label} container sx={styleGrid}>
-                        <Typography sx={styleLabel}>
-                            {label}
+                      return (
+                          <Grid key={label} container sx={styleGrid}>
+                              <Typography sx={styleLabel}>
+                                  {label}
 
-                            {tooltip ? (
-                                <Tooltip title={tooltip}>
-                                    <IconWarning />
-                                </Tooltip>
-                            ) : null}
-                        </Typography>
-                        <Typography variant={isPrevision ? 'h2' : 'body2'} sx={styleValue}>
-                            {value}
-                        </Typography>
-                    </Grid>
-                );
-            })}
+                                  {tooltip ? (
+                                      <Tooltip title={tooltip}>
+                                          <IconWarning />
+                                      </Tooltip>
+                                  ) : null}
+                              </Typography>
+                              <Typography variant={isPrevision ? 'h2' : 'body2'} sx={styleValue}>
+                                  {value}
+                              </Typography>
+                          </Grid>
+                      );
+                  })}
         </Box>
     );
 }

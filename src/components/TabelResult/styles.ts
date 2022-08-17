@@ -48,8 +48,8 @@ export const styles: TypeStyles = {
         flexDirection: 'column',
         justifyContent: 'center',
         width: '100%',
-        transition: 'all 0.5s cubic-bezier(0.55, 0.13, 0.4, 1.15)',
-        overflow: 'hidden',
+        // transition: 'all 0.5s cubic-bezier(0.55, 0.13, 0.4, 1.15)',
+        // overflow: 'hidden',
         // opacity: 0.3,
     },
 };
