@@ -89,14 +89,18 @@ export function CustomInput({
                         InputLabelProps={InputLabelProps}
                         onFocus={(e: FocusEvent<HTMLInputElement>) => {
                             if (isInputMoney) {
-                                const number = parseFloat(removeMoneyFormat(e.target.value));
+                                const number = parseFloat(
+                                    removeMoneyFormat(e.target.value, false) as string,
+                                );
                                 if (number === 0) _onChange('R$ ');
                                 else if (Number.isInteger(number)) _onChange(`R$ ${number}`);
                             }
                         }}
                         onBlur={(e: FocusEvent<HTMLInputElement>) => {
                             if (isInputMoney) {
-                                const number = parseFloat(removeMoneyFormat(e.target.value));
+                                const number = parseFloat(
+                                    removeMoneyFormat(e.target.value, false) as string,
+                                );
                                 if (!number) _onChange('R$ 0,00');
                                 if (Number.isInteger(number)) _onChange(`R$ ${number},00`);
                             }

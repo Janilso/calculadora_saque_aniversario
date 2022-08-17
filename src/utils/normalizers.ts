@@ -1,18 +1,18 @@
-export const removeMoneyFormat = (value = '') => {
+export const removeMoneyFormat = (value = '', toFloat = true) => {
     const number = value
         .toString()
         .replace(/[^0-9]+/, '')
         .replace(/[.]/g, '')
         .replace(/[,]/g, '.')
         .trim();
-    return number;
+    return toFloat ? parseFloat(number) : number;
 };
 
 export const formatMoneyBLR = (value: string | number = 0.0) => {
     let v = value;
 
     if (typeof v === 'number') v = Math.round(v * 100);
-    v = removeMoneyFormat(v?.toString());
+    v = removeMoneyFormat(v?.toString(), false) as string;
 
     if (parseFloat(v) === 0) return 'R$ 0,00';
 

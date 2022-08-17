@@ -4,25 +4,44 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { IconFgts } from '../../assets/icons';
 import { CustomInput } from '../../components/CustomInput';
 import TabelResult from '../../components/TabelResult';
+import calcSaqueService from '../../services/calcSaque';
 import { getOptionMonth } from '../../utils/functions';
+import { removeMoneyFormat } from '../../utils/normalizers';
 import { styles } from './styles';
 
 type FormValues = {
-    saldoFgts: string | number;
-    salarioBruto: string | number;
+    saldoFgts: string;
+    salarioBruto: string;
     mesNascimento: string;
 };
+
+interface IStateDataResult {
+    open: boolean;
+    previsaoSaque?: number;
+    saldoFgts?: number;
+    saldoFuturoTotal?: number;
+    somaLancamentos?: number;
+}
 
 function Home() {
     const methods = useForm<FormValues>();
     const { handleSubmit } = methods;
     const optionsSelect = useMemo(() => getOptionMonth(), []);
-
-    const [disableResult, setDisableResult] = useState(true);
+    const [dataResult, setDataResult] = useState<IStateDataResult>({ open: false });
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        console.log('data', data);
-        setDisableResult((prev) => !prev);
+        setDataResult({ open: false });
+        const { mesNascimento: dataMesNascimento, salarioBruto, saldoFgts: dataSaldo } = data;
+        const mesNascimento = parseFloat(dataMesNascimento);
+        const salario = removeMoneyFormat(salarioBruto) as number;
+        const saldoFgts = removeMoneyFormat(dataSaldo) as number;
+
+        calcSaqueService
+            .postCalculo({ mesNascimento, salario, saldoFgts })
+            .then((result) => {
+                setDataResult({ open: true, ...result });
+            })
+            .catch(() => setDataResult({ open: false }));
     };
 
     return (
@@ -79,12 +98,12 @@ function Home() {
                             </Box>
                         </FormProvider>
                         <TabelResult
-                            saldoFgts={3500}
-                            somaLancamentos={1000}
-                            saldoFuturoTotal={4500}
-                            previsaoSaque={2100}
+                            saldoFgts={dataResult.saldoFgts}
+                            somaLancamentos={dataResult.somaLancamentos}
+                            saldoFuturoTotal={dataResult.saldoFuturoTotal}
+                            previsaoSaque={dataResult.previsaoSaque}
+                            disabled={!dataResult.open}
                             sx={styles.result}
-                            disabled={disableResult}
                         />
                     </Grid>
                 </Grid>
