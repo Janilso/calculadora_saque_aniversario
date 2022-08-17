@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React, { ChangeEvent, FocusEvent, ReactNode } from 'react';
 import { Controller } from 'react-hook-form';
-import { formatMoneyBLR, removeMoneyFormat } from '../../utils/normalizers';
+import { formatMoneyBLR, formatMoneyNumbersOnly, removeMoneyFormat } from '../../utils/normalizers';
 import { TCustomInputSelect } from '../../utils/types';
 
 type TOnChange = {
@@ -89,20 +89,19 @@ export function CustomInput({
                         InputLabelProps={InputLabelProps}
                         onFocus={(e: FocusEvent<HTMLInputElement>) => {
                             if (isInputMoney) {
-                                const number = parseFloat(
-                                    removeMoneyFormat(e.target.value, false) as string,
-                                );
+                                const number = removeMoneyFormat(e.target.value) as number;
                                 if (number === 0) _onChange('R$ ');
-                                else if (Number.isInteger(number)) _onChange(`R$ ${number}`);
+                                else if (Number.isInteger(number))
+                                    _onChange(`R$ ${formatMoneyNumbersOnly(number)}`);
                             }
                         }}
                         onBlur={(e: FocusEvent<HTMLInputElement>) => {
                             if (isInputMoney) {
-                                const number = parseFloat(
-                                    removeMoneyFormat(e.target.value, false) as string,
-                                );
+                                const number = removeMoneyFormat(e.target.value, false) as number;
+
                                 if (!number) _onChange('R$ 0,00');
-                                if (Number.isInteger(number)) _onChange(`R$ ${number},00`);
+                                if (Number.isInteger(number))
+                                    _onChange(`R$ ${formatMoneyNumbersOnly(number)},00`);
                             }
                         }}
                         InputProps={{
