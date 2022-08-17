@@ -51,6 +51,10 @@ const AppTheme = createTheme(
                 fontSize: 28,
                 fontWeight: 400,
             },
+            h3: {
+                fontSize: 20,
+                fontWeight: 400,
+            },
             h2semibold: {
                 fontFamily: ['"Exo"', 'sans-serif'].join(','),
                 color: appColors.white,

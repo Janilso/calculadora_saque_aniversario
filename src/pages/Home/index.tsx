@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Theme, Typography, useMediaQuery } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { IconFgts } from '../../assets/icons';
@@ -27,33 +27,41 @@ function Home() {
     const methods = useForm<FormValues>();
     const { handleSubmit } = methods;
     const optionsSelect = useMemo(() => getOptionMonth(), []);
-    const [dataResult, setDataResult] = useState<IStateDataResult>({ loading: false });
+    const [dataResult, setDataResult] = useState<IStateDataResult>({ loading: true });
+    const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        setDataResult((prev) => ({ ...prev, loading: true }));
         const { mesNascimento: dataMesNascimento, salarioBruto, saldoFgts: dataSaldo } = data;
         const mesNascimento = parseFloat(dataMesNascimento);
         const salario = removeMoneyFormat(salarioBruto) as number;
         const saldoFgts = removeMoneyFormat(dataSaldo) as number;
-
-        calcSaqueService.postCalculo({ mesNascimento, salario, saldoFgts }).then((result) => {
-            setDataResult({ loading: false, ...result });
-        });
+        if (saldoFgts) {
+            setDataResult((prev) => ({ ...prev, loading: true, previsaoSaque: 0 }));
+            calcSaqueService.postCalculo({ mesNascimento, salario, saldoFgts }).then((result) => {
+                setDataResult({ loading: false, ...result });
+            });
+        }
     };
+    const variant = (() => {
+        if (isMobile) return 'body2';
+        if (isTablet) return 'h3';
+        return 'h2';
+    })();
 
     return (
         <Grid container sx={styles.root}>
             <Container>
                 <Grid container>
-                    <Grid item container xs={6} sx={styles.containerLeft}>
+                    <Grid item container xs={12} md={6} sx={styles.containerLeft}>
                         <Typography sx={styles.title}>
                             Calculadora <br /> Saque Aniversário
                         </Typography>
-                        <Typography variant="h2">
+                        <Typography variant={variant}>
                             Tenha uma previsão do valor do Saque Aniversário de seu FGTS
                         </Typography>
                     </Grid>
-                    <Grid item xs={6} sx={styles.containerRight}>
+                    <Grid item xs={12} md={6} sx={styles.containerRight}>
                         <IconFgts />
                         <FormProvider {...methods}>
                             <Box
@@ -68,7 +76,7 @@ function Home() {
                                         isInputMoney
                                     />
                                     <CustomInput
-                                        label="Salário Bruto atual"
+                                        label="Salário atual"
                                         name="salarioBruto"
                                         isInputMoney
                                     />
@@ -92,14 +100,13 @@ function Home() {
                                 <Grid container sx={styles.actions}>
                                     <Button onClick={handleSubmit(onSubmit)}>Calcular</Button>
                                 </Grid>
-                                {dataResult.previsaoSaque ? (
+                                {dataResult.previsaoSaque != null ? (
                                     <TabelResult
                                         saldoFgts={dataResult.saldoFgts}
                                         somaLancamentos={dataResult.somaLancamentos}
                                         saldoFuturoTotal={dataResult.saldoFuturoTotal}
                                         previsaoSaque={dataResult.previsaoSaque}
                                         loading={dataResult.loading}
-                                        // loading
                                         sx={styles.result}
                                     />
                                 ) : null}
