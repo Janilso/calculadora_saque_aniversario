@@ -38,11 +38,15 @@ function Home() {
         const saldoFgts = removeMoneyFormat(dataSaldo) as number;
         if (saldoFgts) {
             setDataResult((prev) => ({ ...prev, loading: true, previsaoSaque: 0 }));
-            calcSaqueService.postCalculo({ mesNascimento, salario, saldoFgts }).then((result) => {
-                setDataResult({ loading: false, ...result });
-            });
+            calcSaqueService
+                .postCalculo({ mesNascimento, salario, saldoFgts })
+                .then((result) => {
+                    setDataResult({ loading: false, ...result });
+                })
+                .catch(() => setDataResult({ loading: false }));
         }
     };
+
     const variant = (() => {
         if (isMobile) return 'body2';
         if (isTablet) return 'h3';

@@ -24,10 +24,10 @@ export const styles: TypeStyles = {
         my: { xs: 2, md: 0 },
     },
     containerRight: {
-        height: 600,
+        height: { sx: 'inital', md: 600 },
         bgcolor: 'appColors.white',
         p: 2,
-        borderRadius: { xs: '8px 8px 0 0', md: '0 8px 8px 0' },
+        borderRadius: { xs: '8px', md: '0 8px 8px 0' },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -36,6 +36,7 @@ export const styles: TypeStyles = {
         justifyContent: 'center',
         flexWrap: 'nowrap',
         flexDirection: { xs: 'column', sm: 'row' },
+        gap: { xs: 2, sm: 1 },
         '& .MuiTextField-root': {
             maxWidth: { xs: '100%', sm: 170 },
             width: { xs: '100%', sm: 'auto' },
@@ -54,6 +55,7 @@ export const styles: TypeStyles = {
     },
     formContainer: {
         mt: 6,
+        width: { xs: '100%', sm: 'fit-content' },
     },
     actions: {
         justifyContent: 'center',

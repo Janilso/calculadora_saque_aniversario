@@ -59,9 +59,9 @@ function TabelResult({
     const renderLoading = () => {
         return (
             <Stack spacing={0.25} sx={styles.stack}>
-                <Skeleton height={42} />
-                <Skeleton height={42} />
-                <Skeleton height={42} />
+                <Skeleton sx={styles.skeleton} />
+                <Skeleton sx={styles.skeleton} />
+                <Skeleton sx={styles.skeleton} />
                 <Skeleton height={96} />
             </Stack>
         );
