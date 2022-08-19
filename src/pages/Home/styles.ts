@@ -2,17 +2,19 @@ import { TypeStyles } from '../../theme/typeStyles';
 
 export const styles: TypeStyles = {
     root: {
-        height: { xs: 'initial', md: '100vh' },
-        minHeight: '100vh',
+        height: { xs: 'inital', md: 'calc(100vh - 165px)' },
+        minHeight: { xs: 'calc(100vh - 200px)', sm: 'calc(100vh - 244px)', md: '100%' },
         width: '100%',
         bgcolor: 'appColors.primary',
         display: 'flex',
         justifyContent: { xs: 'flex-start', md: 'center' },
         alignItems: 'center',
         flexDirection: { xs: 'column', md: 'row' },
+        mt: { xs: 2, md: 0 },
+        mb: { xs: 8, md: 0 },
     },
     containerLeft: {
-        height: { xs: 'inital', md: 600 },
+        height: { xs: 'inital', md: 550 },
         bgcolor: {
             xs: 'transparent',
             md: 'appColors.primaryMedium',
@@ -24,7 +26,7 @@ export const styles: TypeStyles = {
         my: { xs: 2, md: 0 },
     },
     containerRight: {
-        height: { sx: 'inital', md: 600 },
+        height: { sx: 'inital', md: 550 },
         bgcolor: 'appColors.white',
         p: 2,
         borderRadius: { xs: '8px', md: '0 8px 8px 0' },

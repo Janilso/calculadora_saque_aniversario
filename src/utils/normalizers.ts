@@ -26,9 +26,10 @@ export const formatMoneyBLR = (value: string | number = 0.0) => {
     return `R$ ${v}`;
 };
 
-export const formatMoneyNumbersOnly = (value: number) => {
+export const formatMoney = (value: number, numberOnly = false) => {
     return new Intl.NumberFormat('pt-BR', {
-        style: 'decimal',
+        style: numberOnly ? 'decimal' : 'currency',
+        currency: 'BRL',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     }).format(value);

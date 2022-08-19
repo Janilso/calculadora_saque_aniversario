@@ -13,10 +13,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-  
-body #root{
-    height: 100vh;
+    background-color: #001F3F;
 }
 
 code {
