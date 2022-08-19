@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Box, Link, Typography } from '@mui/material';
+import { Box, ButtonBase, Link, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { styles } from './styles';
 
@@ -9,7 +9,9 @@ function Footer() {
         <Box sx={styles.root}>
             <Typography>
                 @{year} - Desenvolvido por{' '}
-                <Link href="//www.janilso.com.br">www.janilso.com.br</Link>
+                <Link component={ButtonBase} href="//www.janilso.com.br">
+                    www.janilso.com.br
+                </Link>
             </Typography>
         </Box>
     );

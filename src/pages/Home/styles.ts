@@ -3,7 +3,7 @@ import { TypeStyles } from '../../theme/typeStyles';
 export const styles: TypeStyles = {
     root: {
         height: { xs: 'inital', md: 'calc(100vh - 165px)' },
-        minHeight: { xs: 'calc(100vh - 200px)', sm: 'calc(100vh - 244px)', md: '100%' },
+        minHeight: { xs: 'calc(100vh - 244px)', md: '100%' },
         width: '100%',
         bgcolor: 'appColors.primary',
         display: 'flex',
