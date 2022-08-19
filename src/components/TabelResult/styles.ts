@@ -43,6 +43,7 @@ export const styles: TypeStyles = {
     itemValuePrev: {
         color: 'appColors.secondary',
         fontWeight: 700,
+        textAlign: 'center',
     },
     container: {
         display: 'flex',

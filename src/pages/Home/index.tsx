@@ -36,15 +36,13 @@ function Home() {
         const mesNascimento = parseFloat(dataMesNascimento);
         const salario = removeMoneyFormat(salarioBruto) as number;
         const saldoFgts = removeMoneyFormat(dataSaldo) as number;
-        if (saldoFgts) {
-            setDataResult((prev) => ({ ...prev, loading: true, previsaoSaque: 0 }));
-            calcSaqueService
-                .postCalculo({ mesNascimento, salario, saldoFgts })
-                .then((result) => {
-                    setDataResult({ loading: false, ...result });
-                })
-                .catch(() => setDataResult({ loading: false }));
-        }
+        setDataResult((prev) => ({ ...prev, loading: true, previsaoSaque: 0 }));
+        calcSaqueService
+            .postCalculo({ mesNascimento, salario, saldoFgts })
+            .then((result) => {
+                setDataResult({ loading: false, ...result });
+            })
+            .catch(() => setDataResult({ loading: false }));
     };
 
     const variant = (() => {

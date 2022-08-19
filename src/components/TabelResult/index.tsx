@@ -50,7 +50,8 @@ function TabelResult({
             },
             {
                 label: 'Sua previsão de saque',
-                value: formatMoneyBLR(previsaoSaque),
+                value:
+                    previsaoSaque === 0 ? 'Sem previsão de saque' : formatMoneyBLR(previsaoSaque),
                 isPrevision: true,
             },
         ];
