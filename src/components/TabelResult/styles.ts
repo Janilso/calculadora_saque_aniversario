@@ -5,6 +5,7 @@ export const styles: TypeStyles = {
     line: {
         display: 'flex',
         justifyContent: 'space-between',
+        flexDirection: { xs: 'column', sm: 'row' },
         p: 1.5,
         border: '1px solid',
         borderColor: (theme: Theme) => alpha(theme.appColors.primaryLight, 0.5),
@@ -42,6 +43,7 @@ export const styles: TypeStyles = {
     itemValuePrev: {
         color: 'appColors.secondary',
         fontWeight: 700,
+        textAlign: 'center',
     },
     container: {
         display: 'flex',
@@ -56,5 +58,8 @@ export const styles: TypeStyles = {
         '.MuiSkeleton-root:last-of-type': {
             borderRadius: '0 0 8px 8px',
         },
+    },
+    skeleton: {
+        height: { xs: 62.91, sm: 42 },
     },
 };

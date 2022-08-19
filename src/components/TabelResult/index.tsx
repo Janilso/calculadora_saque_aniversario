@@ -1,7 +1,7 @@
 import { Box, Grid, Skeleton, Stack, SxProps, Theme, Tooltip, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { IconWarning } from '../../assets/icons';
-import { formatMoneyBLR } from '../../utils/normalizers';
+import { formatMoney } from '../../utils/normalizers';
 import { styles } from './styles';
 
 interface TabelResultProps {
@@ -32,25 +32,25 @@ function TabelResult({
         return [
             {
                 label: 'Saldo do FGTS',
-                value: formatMoneyBLR(saldoFgts),
+                value: formatMoney(saldoFgts),
                 tooltip: 'Saldo atual do FGTS',
             },
             {
                 label: 'Soma de lançamentos',
-                value: formatMoneyBLR(somaLancamentos),
+                value: formatMoney(somaLancamentos),
                 tooltip: `Soma dos futuros lançamentos
                 de saldo na conta do FGTS (8% do salário bruto por mês) 
                 até o mês de aniversário, considerando que o salário bruto não mude.`,
             },
             {
                 label: 'Saldo total com lançamentos',
-                value: formatMoneyBLR(saldoFuturoTotal),
+                value: formatMoney(saldoFuturoTotal),
                 tooltip: `Saldo total da conta do FGTS até o mês de nascimento, 
                 incluindo os lançamentos futuros`,
             },
             {
                 label: 'Sua previsão de saque',
-                value: formatMoneyBLR(previsaoSaque),
+                value: previsaoSaque === 0 ? 'Sem previsão de saque' : formatMoney(previsaoSaque),
                 isPrevision: true,
             },
         ];
@@ -59,9 +59,9 @@ function TabelResult({
     const renderLoading = () => {
         return (
             <Stack spacing={0.25} sx={styles.stack}>
-                <Skeleton height={42} />
-                <Skeleton height={42} />
-                <Skeleton height={42} />
+                <Skeleton sx={styles.skeleton} />
+                <Skeleton sx={styles.skeleton} />
+                <Skeleton sx={styles.skeleton} />
                 <Skeleton height={96} />
             </Stack>
         );

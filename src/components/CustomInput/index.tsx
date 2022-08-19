@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React, { ChangeEvent, FocusEvent, ReactNode } from 'react';
 import { Controller } from 'react-hook-form';
-import { formatMoneyBLR, formatMoneyNumbersOnly, removeMoneyFormat } from '../../utils/normalizers';
+import { formatMoneyBLR, formatMoney, removeMoneyFormat } from '../../utils/normalizers';
 import { TCustomInputSelect } from '../../utils/types';
 
 type TOnChange = {
@@ -92,7 +92,7 @@ export function CustomInput({
                                 const number = removeMoneyFormat(e.target.value) as number;
                                 if (number === 0) _onChange('R$ ');
                                 else if (Number.isInteger(number))
-                                    _onChange(`R$ ${formatMoneyNumbersOnly(number)}`);
+                                    _onChange(`R$ ${formatMoney(number, true)}`);
                             }
                         }}
                         onBlur={(e: FocusEvent<HTMLInputElement>) => {
@@ -101,7 +101,7 @@ export function CustomInput({
 
                                 if (!number) _onChange('R$ 0,00');
                                 if (Number.isInteger(number))
-                                    _onChange(`R$ ${formatMoneyNumbersOnly(number)},00`);
+                                    _onChange(`R$ ${formatMoney(number, true)},00`);
                             }
                         }}
                         InputProps={{
