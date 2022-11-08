@@ -7,6 +7,7 @@ Código fonte do site Cálculo Saque Aniversário.
 Site de código aberto criado para calcular
 uma previsão do Saque Aniversário de sua conta do FGTS.
 Feito em ReactJS e Typescript.
+
 ```
 
 <br>
