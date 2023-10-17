@@ -8,10 +8,7 @@ function Footer() {
     return (
         <Box sx={styles.root}>
             <Typography>
-                @{year} - Desenvolvido por{' '}
-                <Link component={ButtonBase} href="//www.janilso.com.br">
-                    www.janilso.com.br
-                </Link>
+                @{year} - Desenvolvido por <a href="//www.janilso.com.br">www.janilso.com.br</a>
             </Typography>
         </Box>
     );

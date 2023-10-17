@@ -7,5 +7,9 @@ export const styles: TypeStyles = {
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'center',
+
+        '& a': {
+            color: 'appColors.secondary',
+        },
     },
 };
