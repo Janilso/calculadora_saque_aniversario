@@ -76,6 +76,8 @@ function Home() {
                                         label="Saldo do FGTS"
                                         name="saldoFgts"
                                         isInputMoney
+                                        data-gtm-form="input"
+                                        data-gtm-name="saldoFgts"
                                     />
                                     <CustomInput
                                         label="Salário atual"
@@ -100,7 +102,14 @@ function Home() {
                                     />
                                 </Grid>
                                 <Grid container sx={styles.actions}>
-                                    <Button onClick={handleSubmit(onSubmit)}>Calcular</Button>
+                                    <Button
+                                        data-gtm-type="click"
+                                        data-gtm-clicktype="button"
+                                        data-gtm-name="Calcular"
+                                        onClick={handleSubmit(onSubmit)}
+                                    >
+                                        Calcular
+                                    </Button>
                                 </Grid>
                                 {dataResult.previsaoSaque != null ? (
                                     <TabelResult
