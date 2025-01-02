@@ -14,7 +14,7 @@ export const styles: TypeStyles = {
         mb: { xs: 8, md: 0 },
     },
     containerLeft: {
-        height: { xs: 'inital', md: 550 },
+        height: { xs: 'inital', md: 600 },
         bgcolor: {
             xs: 'transparent',
             md: 'appColors.primaryMedium',
@@ -26,13 +26,17 @@ export const styles: TypeStyles = {
         my: { xs: 2, md: 0 },
     },
     containerRight: {
-        height: { sx: 'inital', md: 550 },
+        height: { sx: 'inital', md: 600 },
         bgcolor: 'appColors.white',
         p: 2,
         borderRadius: { xs: '8px', md: '0 8px 8px 0' },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+
+        '& #icon-fgts': {
+            minHeight: 21,
+        },
     },
     itensForm: {
         justifyContent: 'center',
@@ -45,7 +49,7 @@ export const styles: TypeStyles = {
             flex: 1,
         },
     },
-    title: {
+    title: (theme) => ({
         color: 'appColors.secondary',
         fontWeight: 700,
         fontSize: { xs: 28, sm: 40, md: 50 },
@@ -54,6 +58,45 @@ export const styles: TypeStyles = {
         br: {
             display: { xs: 'none', sm: 'block' },
         },
+        '&:after': {
+            content: "''",
+            display: 'block',
+            position: 'absolute',
+            bottom: { xs: -5, lg: 0 },
+            right: 0,
+            width: 80,
+            height: { xs: 5, sm: 7 },
+            bgcolor: 'appColors.primaryLight',
+            animation: 'animation-line 7s cubic-bezier(0, 0, 0.03, 0.9) infinite',
+        },
+        '@keyframes animation-line': {
+            '0%, 44%, 88.1%, 100%': {
+                transformOrigin: 'left',
+            },
+            '0%, 100%, 88%': {
+                transform: 'scaleX(0)',
+            },
+            '44.1%, 88%': {
+                transformOrigin: 'right',
+            },
+            '33%, 44%': {
+                transform: 'scaleX(1)',
+            },
+        },
+        [theme.breakpoints.between(901, 1024)]: {
+            '&:after': {
+                left: 183,
+            },
+        },
+        [theme.breakpoints.down(431)]: {
+            '&:after': {
+                left: 68,
+            },
+        },
+    }),
+    subtitle: {
+        maxWidth: { xs: 'initial', md: 370 },
+        mt: { xs: 2, md: 0 },
     },
     formContainer: {
         mt: 6,

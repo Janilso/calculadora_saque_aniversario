@@ -8,6 +8,7 @@ import calcSaqueService from '../../services/calcSaque';
 import { getOptionMonth } from '../../utils/functions';
 import { removeMoneyFormat } from '../../utils/normalizers';
 import { styles } from './styles';
+import ButtonAbout from '../../components/ButtonAbout';
 
 type FormValues = {
     saldoFgts: string;
@@ -59,7 +60,7 @@ function Home() {
                         <Typography sx={styles.title}>
                             Calculadora <br /> Saque Aniversário
                         </Typography>
-                        <Typography variant={variant}>
+                        <Typography sx={styles.subtitle} variant={variant}>
                             Tenha uma previsão do valor do Saque Aniversário de seu FGTS
                         </Typography>
                     </Grid>
@@ -126,6 +127,7 @@ function Home() {
                     </Grid>
                 </Grid>
             </Container>
+            <ButtonAbout />
         </Grid>
     );
 }
